@@ -62,7 +62,7 @@ function isCollide(a,b){
 
 // 遊戲重新開始
 function restartGame() {
-  player.x = 50; player.y = canvas.height/2-25; player.hp = 3;
+  player.x = 50; player.y = canvas.height/2-25; player.hp = 10;
   obstacles = []; bullets = []; score = 0; gameTime = 0; gameOver = false; lastSkillTime = 0;
   restartBtn.style.display = 'none';
   update();
