@@ -2,14 +2,30 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>闖關遊戲</title>
-  <style>
-    body { margin:0; overflow:hidden; }
-    canvas { background: #eee; display:block; margin:0 auto; }
-  </style>
+  <title>升級闖關遊戲</title>
+  <!-- 連結 CSS 檔 -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- UI 顯示分數與血量 -->
+  <div id="ui">
+    <div id="score">分數：0</div>
+    <div id="hp">血量：10</div>
+  </div>
+
+  <!-- 遊戲畫布 -->
   <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <!-- 遊戲結束後的重新開始按鈕 -->
+  <button id="restartBtn">重新開始</button>
+
+  <!-- 音效檔（請放同資料夾） -->
+  <audio id="shootSound" src="shoot.mp3"></audio>
+  <audio id="hitSound" src="hit.mp3"></audio>
+  <audio id="gameOverSound" src="gameover.mp3"></audio>
+
+  <!-- 連結 JS 遊戲邏輯 -->
   <script src="game.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,70 @@
+/* 全域重置 */
+* { 
+  margin:0; 
+  padding:0; 
+  box-sizing:border-box; 
+}
+
+body {
+  background:#111;             /* 背景顏色 */
+  color:#fff;                  /* 文字顏色 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow:hidden;             /* 避免頁面滾動 */
+  user-select:none;            /* 避免文字被選取 */
+}
+
+/* Canvas置中並加邊框 */
+canvas { 
+  display:block; 
+  margin:0 auto; 
+  background:#222; 
+  border:2px solid #555; 
+}
+
+/* 分數與血量顯示 */
+#ui { 
+  position:absolute; 
+  top:10px; 
+  left:50%; 
+  transform:translateX(-50%);
+  display:flex; 
+  gap:30px; 
+  font-size:20px; 
+  z-index:10; 
+}
+
+/* 重新開始按鈕 */
+#restartBtn {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%, -50%);
+  font-size:28px; padding:12px 24px;
+  background-color:#ff5555;
+  border:none; border-radius:10px;
+  cursor:pointer; color:#fff;
+  display:none;   /* 預設隱藏 */
+  z-index:20;
+  transition:0.2s all;
+}
+
+/* 按鈕滑鼠懸停效果 */
+#restartBtn:hover {
+  background-color:#ff2222;
+  transform:translate(-50%, -50%) scale(1.05);
+}
+
+/* 血量條（可選進階使用） */
+.hp-bar {
+  width:150px; height:20px;
+  background:#444;
+  border:2px solid #666;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.hp-fill {
+  height:100%;
+  background:lime;
+  width:100%; /* 動態改變血量 */
+  transition:0.2s width;
+}
