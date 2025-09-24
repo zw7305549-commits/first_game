@@ -7,7 +7,7 @@ const gameOverSound = document.getElementById('gameOverSound');
 const restartBtn = document.getElementById('restartBtn');
 
 // 玩家物件
-const player = { x:50, y:canvas.height/2-25, width:50, height:50, speed:5, hp:100 };
+const player = { x:50, y:canvas.height/2-25, width:50, height:50, speed:5, hp:10 };
 
 // 障礙物與子彈陣列
 let obstacles = [];
@@ -62,7 +62,7 @@ function isCollide(a,b){
 
 // 遊戲重新開始
 function restartGame() {
-  player.x = 50; player.y = canvas.height/2-25; player.hp = 100;
+  player.x = 50; player.y = canvas.height/2-25; player.hp = 10;
   obstacles = []; bullets = []; score = 0; gameTime = 0; gameOver = false; lastSkillTime = 0;
   restartBtn.style.display = 'none';
   update();
@@ -184,6 +184,17 @@ bindTouch('left', 'a');
 bindTouch('right', 'd');
 bindTouch('shoot', ' ');
 bindTouch('skill', 'Shift');
+
+document.getElementById('skill').addEventListener('touchstart', () => {
+  if(!gameOver){
+    const now = Date.now();
+    if(now - lastSkillTime >= skillCooldown){
+      score += obstacles.length*50;
+      obstacles = [];
+      lastSkillTime = now;
+    }
+  }
+});
 
 update();
 
