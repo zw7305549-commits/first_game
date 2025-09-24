@@ -7,7 +7,7 @@ const gameOverSound = document.getElementById('gameOverSound');
 const restartBtn = document.getElementById('restartBtn');
 
 // 玩家物件
-const player = { x:50, y:canvas.height/2-25, width:50, height:50, speed:5, hp:10 };
+const player = { x:50, y:canvas.height/2-25, width:50, height:50, speed:5, hp:100 };
 
 // 障礙物與子彈陣列
 let obstacles = [];
@@ -20,7 +20,7 @@ let gameTime = 0;
 
 // 技能冷卻
 let lastSkillTime = 0;
-const skillCooldown = 5000; // 5秒
+const skillCooldown = 10000; // 10秒
 
 // 紀錄按鍵狀態
 const keys = {};
@@ -62,7 +62,7 @@ function isCollide(a,b){
 
 // 遊戲重新開始
 function restartGame() {
-  player.x = 50; player.y = canvas.height/2-25; player.hp = 10;
+  player.x = 50; player.y = canvas.height/2-25; player.hp = 100;
   obstacles = []; bullets = []; score = 0; gameTime = 0; gameOver = false; lastSkillTime = 0;
   restartBtn.style.display = 'none';
   update();
@@ -79,6 +79,11 @@ function update() {
   if(keys['s'] && player.y+player.height<canvas.height) player.y += player.speed;
   if(keys['a'] && player.x>0) player.x -= player.speed;
   if(keys['d'] && player.x+player.width<canvas.width) player.x += player.speed;
+  // 玩家移動（方向鍵）
+  if(keys['arrowup'] && player.y>0) player.y -= player.speed;
+  if(keys['arrowdown'] && player.y+player.height<canvas.height) player.y += player.speed;
+  if(keys['arrowleft'] && player.x>0) player.x -= player.speed;
+  if(keys['arrowright'] && player.x+player.width<canvas.width) player.x += player.speed;
 
   // 障礙物移動
   obstacles.forEach(ob => ob.x -= ob.speed);
@@ -159,4 +164,26 @@ function draw() {
   }
 }
 
+// === 綁定觸控按鈕 ===
+function bindTouch(id, key) {
+  const btn = document.getElementById(id);
+  if (!btn) return;
+  btn.addEventListener('touchstart', e => {
+    e.preventDefault();
+    keys[key] = true;
+  });
+  btn.addEventListener('touchend', e => {
+    e.preventDefault();
+    keys[key] = false;
+  });
+}
+
+bindTouch('up', 'w');
+bindTouch('down', 's');
+bindTouch('left', 'a');
+bindTouch('right', 'd');
+bindTouch('shoot', ' ');
+bindTouch('skill', 'Shift');
+
 update();
+
