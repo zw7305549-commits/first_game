@@ -20,7 +20,7 @@ let gameTime = 0;
 
 // 技能冷卻
 let lastSkillTime = 0;
-const skillCooldown = 10000; // 10秒
+const skillCooldown = 5000; // 5秒
 
 // 紀錄按鍵狀態
 const keys = {};
@@ -79,7 +79,7 @@ function update() {
   if(keys['s'] && player.y+player.height<canvas.height) player.y += player.speed;
   if(keys['a'] && player.x>0) player.x -= player.speed;
   if(keys['d'] && player.x+player.width<canvas.width) player.x += player.speed;
-  // 玩家移動（方向鍵）
+  // 玩家移動(方向鍵)
   if(keys['arrowup'] && player.y>0) player.y -= player.speed;
   if(keys['arrowdown'] && player.y+player.height<canvas.height) player.y += player.speed;
   if(keys['arrowleft'] && player.x>0) player.x -= player.speed;
