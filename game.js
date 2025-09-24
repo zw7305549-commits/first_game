@@ -164,37 +164,4 @@ function draw() {
   }
 }
 
-// === 綁定觸控按鈕 ===
-function bindTouch(id, key) {
-  const btn = document.getElementById(id);
-  if (!btn) return;
-  btn.addEventListener('touchstart', e => {
-    e.preventDefault();
-    keys[key] = true;
-  });
-  btn.addEventListener('touchend', e => {
-    e.preventDefault();
-    keys[key] = false;
-  });
-}
-
-bindTouch('up', 'w');
-bindTouch('down', 's');
-bindTouch('left', 'a');
-bindTouch('right', 'd');
-bindTouch('shoot', ' ');
-bindTouch('skill', 'Shift');
-
-document.getElementById('skill').addEventListener('touchstart', () => {
-  if(!gameOver){
-    const now = Date.now();
-    if(now - lastSkillTime >= skillCooldown){
-      score += obstacles.length*50;
-      obstacles = [];
-      lastSkillTime = now;
-    }
-  }
-});
-
 update();
-
